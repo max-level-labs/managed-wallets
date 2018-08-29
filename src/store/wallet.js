@@ -2,8 +2,8 @@ import web3 from '~/plugins/web3'
 import controllerAbi from './../../build/contracts/Controller.json'
 import userWalletAbi from './../../build/contracts/UserWallet.json'
 
-const controllerAddress = '0x885ab717fabe2d7d45132fd4cbbce2affe5faf00'
-const userWalletAddress = '0x770f5f0f692fdc94b12e1e8c0bd02559effb382c'
+const controllerAddress = '0x1cb8eec4039348769a93935f577698e0f7192d0e'
+const userWalletAddress = '0xfc50d258dc2c07424001637d2fe70667b3a96714'
 const controller = new web3.eth.Contract(controllerAbi.abi, controllerAddress)
 const userWallet = new web3.eth.Contract(userWalletAbi.abi, userWalletAddress)
 
@@ -23,8 +23,7 @@ export const mutations = {
   updateBalance: (state, wallet) => {
     state.wallets.find(obj => {
       return obj.address === wallet.address
-    }).balance =
-      wallet.balance
+    }).balance = wallet.balance
   },
   sweepWallet: (state, address) => {
     state.wallets.filter(obj => obj.address !== address)

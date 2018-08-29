@@ -3,9 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _5e9be744 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
-const _491630e3 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
-const _b9ec706e = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _ac655884 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
+const _f4742f0a = () => import('../src/pages/auth.vue' /* webpackChunkName: "pages/auth" */).then(m => m.default || m)
+const _546ea6a9 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
+const _a33b84e2 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -67,17 +68,22 @@ export function createRouter () {
     routes: [
 		{
 			path: "/transfer",
-			component: _5e9be744,
+			component: _ac655884,
 			name: "transfer"
 		},
 		{
+			path: "/auth",
+			component: _f4742f0a,
+			name: "auth"
+		},
+		{
 			path: "/sweep",
-			component: _491630e3,
+			component: _546ea6a9,
 			name: "sweep"
 		},
 		{
 			path: "/",
-			component: _b9ec706e,
+			component: _a33b84e2,
 			name: "index"
 		}
     ],
