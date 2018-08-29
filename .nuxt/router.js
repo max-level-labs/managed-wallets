@@ -3,9 +3,9 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _5e9be744 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
-const _491630e3 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
-const _b9ec706e = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _0bcceb00 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
+const _b383b2b2 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
+const _0031bd8d = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -67,17 +67,17 @@ export function createRouter () {
     routes: [
 		{
 			path: "/transfer",
-			component: _5e9be744,
+			component: _0bcceb00,
 			name: "transfer"
 		},
 		{
 			path: "/sweep",
-			component: _491630e3,
+			component: _b383b2b2,
 			name: "sweep"
 		},
 		{
 			path: "/",
-			component: _b9ec706e,
+			component: _0031bd8d,
 			name: "index"
 		}
     ],

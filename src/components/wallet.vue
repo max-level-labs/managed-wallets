@@ -4,7 +4,7 @@
       <v-card-title primary-title>
         <div class="display-1" style="width: 100%; margin: 10px"> Wallet </div>
         <v-chip class="headline font-weight-bold" style="margin: auto">{{ wallet.address }}</v-chip>
-        <v-card-text>{{ wallet.balance }} 
+        <v-card-text>{{ balance }} 
           <v-icon style="margin-left: 10px">fab fa-ethereum</v-icon>
         </v-card-text>
         <div v-if="!sweeper" class="sweep">
@@ -33,7 +33,7 @@
             />
           </v-flex>
           <v-flex>
-            <v-btn round color="success" dark>Send</v-btn>
+            <v-btn round color="success" dark @click="() => { sweep(wallet.address) }">Sweep</v-btn>
           </v-flex>
         </div>
       </v-card-title>
@@ -53,25 +53,30 @@ export default {
       recipientAddress: ''
     }
   },
+  computed: {
+    balance() {
+      return this.$store.state.wallet.wallets.find(
+        wal => wal.address === this.wallet.address
+      ).balance
+    }
+  },
   methods: {
     async getBalance(address) {
       await this.$store.dispatch('wallet/getBalance', { address })
     },
     async sweep(address) {
       let receiver = this.recipientAddress
-      if (receiver === '') receiver = '0x0'
-      await this.$store.dispatch(
-        'wallet/sweep',
-        {
-          walletAddress: address,
-          address: receiver,
-          amount: this.amount
-        },
-        (err, result) => {
+      if (receiver === '')
+        receiver = '0x0000000000000000000000000000000000000000'
+      await this.$store.dispatch('wallet/sweep', {
+        walletAddress: address,
+        tokenAddress: receiver,
+        amount: this.amount,
+        callback: (err, result) => {
           if (err) throw err
           console.log(result)
         }
-      )
+      })
     }
   }
 }

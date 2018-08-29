@@ -3,9 +3,9 @@ import controllerAbi from './../../build/contracts/Controller.json'
 import userWalletAbi from './../../build/contracts/UserWallet.json'
 
 const controllerAddress = '0x885ab717fabe2d7d45132fd4cbbce2affe5faf00'
-const userWalletAddress = '0x770f5f0f692fdc94b12e1e8c0bd02559effb382c'
+// const controllerAddress = '0x321da16bc5b58cd38b67191d6831f88ae7dfc043' //rinkeby
+// const userWalletAddress = '0x128e075a4c47e04910f56e0413bb33dbf5bbfec9' //rinkeby
 const controller = new web3.eth.Contract(controllerAbi.abi, controllerAddress)
-const userWallet = new web3.eth.Contract(userWalletAbi.abi, userWalletAddress)
 
 let account
 web3.eth.getAccounts().then(res => {
@@ -27,7 +27,9 @@ export const mutations = {
       wallet.balance
   },
   sweepWallet: (state, address) => {
-    state.wallets.filter(obj => obj.address !== address)
+    if (state.wallets.find(wal => wal.address === address).balance === '0') {
+      state.wallets = state.wallets.filter(wal => wal.address !== address)
+    }
   }
 }
 
@@ -45,7 +47,7 @@ export const actions = {
       .send(
         {
           from: account,
-          gas: 9000000
+          gas: 6000000
         },
         (err, result) => {
           if (err) {
@@ -66,13 +68,22 @@ export const actions = {
         callback(err, null)
       })
   },
-  async sweep({ commit }, { walletAddress, address, amount }, callback) {
+  async sweep(
+    { dispatch, commit },
+    { walletAddress, tokenAddress, amount, callback }
+  ) {
+    const transferAmount = Number(amount) * 1000000000000000000
+    const userWalletAddress = walletAddress
+    const userWallet = new web3.eth.Contract(
+      userWalletAbi.abi,
+      userWalletAddress
+    )
     return userWallet.methods
-      .sweep(address, amount * 1000000000000000000)
+      .sweep(tokenAddress, transferAmount)
       .send(
         {
           from: account,
-          gas: 9000000
+          gas: 6000000
         },
         (err, result) => {
           if (err) {
@@ -80,20 +91,20 @@ export const actions = {
             callback(err, null)
           } else {
             console.log(`result ${result}`)
+            web3.eth.getTransaction(result).then(console.log)
           }
         }
       )
-      .then(receipt => {
-        const sweepLog = receipt.events.LogSweep.returnValues[0]
-        commit('sweepWallet', { address: walletAddress })
-        callback(null, sweepLog)
+      .then(() => {
+        commit('sweepWallet', walletAddress)
+        dispatch('getBalance', { address: walletAddress })
       })
       .catch(err => {
         console.error(err)
         callback(err, null)
       })
   },
-  async transfer(context, params) {
+  async transfer({ dispatch }, params) {
     const value = web3.utils.toWei(params.value, 'ether')
     const estimateGas = await web3.eth.estimateGas({
       from: params.from,
@@ -106,14 +117,14 @@ export const actions = {
       value: value,
       gas: estimateGas
     })
-
+    dispatch('checkBalance')
     return receipt
   },
   async getBalance({ commit }, params) {
     const ether = await web3.eth.getBalance(params.address)
     commit('updateBalance', {
       address: params.address,
-      balance: parseInt(ether) / 1000000000000000000
+      balance: (parseInt(ether) / 1000000000000000000).toString()
     })
   }
 }
