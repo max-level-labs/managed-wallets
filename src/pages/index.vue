@@ -1,9 +1,7 @@
 <template>
   <section class="container">
     <div v-if="wallets.length > 0" style="margin: auto; width: 50vw">
-      <div v-for="wal in wallets" :key="wal.address">
-        <wallet :wallet="wal" />
-      </div>
+      <wallet v-for="wal in wallets" :key="wal.address" :wallet="wal" />
     </div>
     <div v-else class="alert">
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> No wallets have been created </v-alert> 
