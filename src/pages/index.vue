@@ -1,20 +1,23 @@
 <template>
   <section class="container">
-    <div v-if="wallets.length > 0" style="margin: auto; width: 50vw">
-      <wallet v-for="wal in wallets" :key="wal.address" :wallet="wal" />
+    <div v-if="wallets.length > 0" class="walletDisplay" style="display: flex;">
+      <wallet />
+      <wallet-menu />
     </div>
-    <div v-else class="alert">
+    <div v-else class="alert" >
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> No wallets have been created </v-alert> 
     </div>
   </section>
 </template>
 
 <script>
-import wallet from './../components/wallet.vue'
+import Wallet from './../components/wallet.vue'
+import WalletMenu from '~/components/walletMenu.vue'
 
 export default {
   components: {
-    wallet
+    Wallet,
+    WalletMenu
   },
   computed: {
     wallets() {
@@ -31,10 +34,14 @@ export default {
   width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   text-align: center;
-  padding: 0;
   margin: 0;
+  padding: 0;
+}
+
+.walletDisplay {
+  padding: 50px;
 }
 
 .alert {

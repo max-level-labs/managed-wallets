@@ -2,9 +2,7 @@ import web3 from '~/plugins/web3'
 import controllerAbi from './../../build/contracts/Controller.json'
 import userWalletAbi from './../../build/contracts/UserWallet.json'
 
-const controllerAddress = '0x885ab717fabe2d7d45132fd4cbbce2affe5faf00'
-// const controllerAddress = '0x321da16bc5b58cd38b67191d6831f88ae7dfc043' //rinkeby
-// const userWalletAddress = '0x128e075a4c47e04910f56e0413bb33dbf5bbfec9' //rinkeby
+const controllerAddress = '0x1cb8eec4039348769a93935f577698e0f7192d0e'
 const controller = new web3.eth.Contract(controllerAbi.abi, controllerAddress)
 
 let account
@@ -13,7 +11,8 @@ web3.eth.getAccounts().then(res => {
 })
 
 export const state = () => ({
-  wallets: []
+  wallets: [],
+  walletInfo: {}
 })
 
 export const mutations = {
@@ -23,13 +22,15 @@ export const mutations = {
   updateBalance: (state, wallet) => {
     state.wallets.find(obj => {
       return obj.address === wallet.address
-    }).balance =
-      wallet.balance
+    }).balance = wallet.balance
   },
   sweepWallet: (state, address) => {
     if (state.wallets.find(wal => wal.address === address).balance === '0') {
       state.wallets = state.wallets.filter(wal => wal.address !== address)
     }
+  },
+  setInfo: (state, info) => {
+    state.walletInfo = info
   }
 }
 
@@ -61,6 +62,7 @@ export const actions = {
       .then(receipt => {
         const newAddress = receipt.events.LogNewWallet.returnValues[0]
         commit('addAddress', { address: newAddress, balance: 0 })
+        commit('setInfo', { address: newAddress, balance: 0 })
         callback(null, newAddress)
       })
       .catch(err => {
@@ -120,12 +122,22 @@ export const actions = {
     dispatch('checkBalance')
     return receipt
   },
-  async getBalance({ commit }, params) {
+  async getBalance({ commit, state }, params) {
     const ether = await web3.eth.getBalance(params.address)
+    if (state.walletInfo.address === params.address) {
+      commit('setInfo', {
+        address: params.address,
+        balance: (parseInt(ether) / 1000000000000000000).toString()
+      })
+    }
     commit('updateBalance', {
       address: params.address,
       balance: (parseInt(ether) / 1000000000000000000).toString()
     })
+  },
+  async changeWalletView({ commit }, walletInfo) {
+    console.log(walletInfo)
+    commit('setInfo', walletInfo)
   }
 }
 
