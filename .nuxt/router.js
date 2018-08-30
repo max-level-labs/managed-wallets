@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _ac655884 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
-const _f4742f0a = () => import('../src/pages/auth.vue' /* webpackChunkName: "pages/auth" */).then(m => m.default || m)
-const _546ea6a9 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
-const _a33b84e2 = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+const _0bcceb00 = () => import('../src/pages/transfer.vue' /* webpackChunkName: "pages/transfer" */).then(m => m.default || m)
+const _ffb11e86 = () => import('../src/pages/auth.vue' /* webpackChunkName: "pages/auth" */).then(m => m.default || m)
+const _b383b2b2 = () => import('../src/pages/sweep.vue' /* webpackChunkName: "pages/sweep" */).then(m => m.default || m)
+const _0031bd8d = () => import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
 
@@ -68,22 +68,22 @@ export function createRouter () {
     routes: [
 		{
 			path: "/transfer",
-			component: _ac655884,
+			component: _0bcceb00,
 			name: "transfer"
 		},
 		{
 			path: "/auth",
-			component: _f4742f0a,
+			component: _ffb11e86,
 			name: "auth"
 		},
 		{
 			path: "/sweep",
-			component: _546ea6a9,
+			component: _b383b2b2,
 			name: "sweep"
 		},
 		{
 			path: "/",
-			component: _a33b84e2,
+			component: _0031bd8d,
 			name: "index"
 		}
     ],
