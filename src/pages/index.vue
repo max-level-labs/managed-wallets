@@ -1,9 +1,8 @@
 <template>
   <section class="container">
     <div v-if="wallets.length > 0" style="margin: auto; width: 50vw">
-      <div v-for="wal in wallets" :key="wal.address">
-        <wallet :wallet="wal" />
-      </div>
+      <wallet />
+      <wallet-menu />
     </div>
     <div v-else class="alert">
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> No wallets have been created </v-alert> 
@@ -12,11 +11,13 @@
 </template>
 
 <script>
-import wallet from './../components/wallet.vue'
+import Wallet from './../components/wallet.vue'
+import WalletMenu from '~/components/walletMenu.vue'
 
 export default {
   components: {
-    wallet
+    Wallet,
+    WalletMenu
   },
   computed: {
     wallets() {

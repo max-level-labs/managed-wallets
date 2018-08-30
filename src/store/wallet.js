@@ -13,7 +13,8 @@ web3.eth.getAccounts().then(res => {
 })
 
 export const state = () => ({
-  wallets: []
+  wallets: [],
+  walletInfo: {}
 })
 
 export const mutations = {
@@ -27,6 +28,9 @@ export const mutations = {
   },
   sweepWallet: (state, address) => {
     state.wallets.filter(obj => obj.address !== address)
+  },
+  setInfo: (state, info) => {
+    state.walletInfo = info
   }
 }
 
@@ -58,6 +62,7 @@ export const actions = {
       .then(receipt => {
         const newAddress = receipt.events.LogNewWallet.returnValues[0]
         commit('addAddress', { address: newAddress, balance: 0 })
+        commit('setInfo', { address: newAddress, balance: 0 })
         callback(null, newAddress)
       })
       .catch(err => {
@@ -114,6 +119,10 @@ export const actions = {
       address: params.address,
       balance: parseInt(ether) / 1000000000000000000
     })
+  },
+  async changeWalletView({ commit }, walletInfo) {
+    console.log(walletInfo)
+    commit('setInfo', walletInfo)
   }
 }
 
