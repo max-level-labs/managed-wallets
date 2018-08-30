@@ -1,7 +1,7 @@
 <template>
   <div class="walletMenu">
     <div v-for="wal in wallets" :key="wal.address">
-      <v-btn dark @click="() => handleClick(wal)">
+      <v-btn style="text-transform: none !important; width: 35vw;" dark @click="() => handleClick(wal)">
         WALLET
         {{ wal.address }}
       </v-btn>
@@ -25,4 +25,11 @@ export default {
 </script>
 
 <style>
+.walletMenu {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  max-height: 30vh;
+  min-width: 40vw;
+  overflow-y: scroll;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-flex xs12>
-    <v-card class="wallet" style="margin: 10px; border-radius: 10px">
+    <v-card class="wallet" style="border-radius: 10px; margin-left: 15px;">
       <v-card-title primary-title>
         <div class="caption" style="width: 100%; margin: 10px">
           Wallet
@@ -37,11 +37,7 @@
             />
           </v-flex>
           <v-flex>
-<<<<<<< HEAD
-            <v-btn dark>Send</v-btn>
-=======
-            <v-btn round color="success" dark @click="() => { sweep(wallet.address) }">Sweep</v-btn>
->>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
+            <v-btn round color="success" dark @click="() => { sweep(walletInfo.address) }">Sweep</v-btn>
           </v-flex>
         </div>
       </v-card-title>
@@ -62,15 +58,13 @@ export default {
     }
   },
   computed: {
-<<<<<<< HEAD
     walletInfo() {
       return this.$store.state.wallet.walletInfo
-=======
+    },
     balance() {
       return this.$store.state.wallet.wallets.find(
         wal => wal.address === this.wallet.address
       ).balance
->>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
     }
   },
   methods: {
@@ -99,9 +93,6 @@ export default {
 .wallet {
   justify-content: center;
   align-items: center;
-  /* background: #0f2027;
-  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
-  background: linear-gradient(to right, #2c5364, #203a43, #0f2027); */
 }
 
 .balBtn {
