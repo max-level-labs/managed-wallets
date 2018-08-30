@@ -68,7 +68,11 @@ export function createRouter () {
     routes: [
 		{
 			path: "/transfer",
+<<<<<<< HEAD
 			component: _ac655884,
+=======
+			component: _0bcceb00,
+>>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
 			name: "transfer"
 		},
 		{
@@ -78,12 +82,20 @@ export function createRouter () {
 		},
 		{
 			path: "/sweep",
+<<<<<<< HEAD
 			component: _546ea6a9,
+=======
+			component: _b383b2b2,
+>>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
 			name: "sweep"
 		},
 		{
 			path: "/",
+<<<<<<< HEAD
 			component: _a33b84e2,
+=======
+			component: _0031bd8d,
+>>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
 			name: "index"
 		}
     ],

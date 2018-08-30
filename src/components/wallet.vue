@@ -37,7 +37,11 @@
             />
           </v-flex>
           <v-flex>
+<<<<<<< HEAD
             <v-btn dark>Send</v-btn>
+=======
+            <v-btn round color="success" dark @click="() => { sweep(wallet.address) }">Sweep</v-btn>
+>>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
           </v-flex>
         </div>
       </v-card-title>
@@ -58,8 +62,15 @@ export default {
     }
   },
   computed: {
+<<<<<<< HEAD
     walletInfo() {
       return this.$store.state.wallet.walletInfo
+=======
+    balance() {
+      return this.$store.state.wallet.wallets.find(
+        wal => wal.address === this.wallet.address
+      ).balance
+>>>>>>> 02187a90e5ee03b7f23d890b29959629ea008bbd
     }
   },
   methods: {
@@ -68,19 +79,17 @@ export default {
     },
     async sweep(address) {
       let receiver = this.recipientAddress
-      if (receiver === '') receiver = '0x0'
-      await this.$store.dispatch(
-        'wallet/sweep',
-        {
-          walletAddress: address,
-          address: receiver,
-          amount: this.amount
-        },
-        (err, result) => {
+      if (receiver === '')
+        receiver = '0x0000000000000000000000000000000000000000'
+      await this.$store.dispatch('wallet/sweep', {
+        walletAddress: address,
+        tokenAddress: receiver,
+        amount: this.amount,
+        callback: (err, result) => {
           if (err) throw err
           console.log(result)
         }
-      )
+      })
     }
   }
 }

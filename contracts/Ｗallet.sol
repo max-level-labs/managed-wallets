@@ -49,15 +49,12 @@ contract DefaultSweeper is AbstractSweeper {
             if (amount > token.balanceOf(this)) {
                 return false;
             }
-
             success = token.transfer(destination, amount);
-        }
-        else {
+        } else {
             uint amountInWei = _amount;
             if (amountInWei > this.balance) {
                 return false;
             }
-
             success = destination.send(amountInWei);
         }
 
@@ -80,7 +77,7 @@ contract UserWallet {
         (_from);
         (_value);
         (_data);
-     }
+    }
 
     function sweep(address _token, uint _amount)
     returns (bool) {
