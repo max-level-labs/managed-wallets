@@ -36,7 +36,8 @@ export const mutations = {
 }
 
 export const actions = {
-  checkBalance({ dispatch, state }) {
+  async checkBalance({ dispatch, state }) {
+    if (!state.walletInfo) return false
     return Promise.all(
       state.wallets.map(wal => {
         return dispatch('getBalance', wal)
