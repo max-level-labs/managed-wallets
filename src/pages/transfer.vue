@@ -59,6 +59,7 @@ export default {
 <style>
 .transfer {
   margin: auto;
+  margin-top: 50px;
 }
 .transBtn {
   background: #42275a;
