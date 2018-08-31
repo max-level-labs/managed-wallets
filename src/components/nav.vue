@@ -8,6 +8,12 @@
           MGMT
         </nuxt-link>
       </v-toolbar-title>
+      <v-toolbar-items style="margin-left: 10px;">
+        <v-btn flat class="tabs">
+          {{ total }}
+          <v-icon style="margin-left: 10px">fab fa-ethereum</v-icon>
+        </v-btn>
+      </v-toolbar-items>
       <v-spacer />
 
       <v-toolbar-items class="hidden-sm-and-dwn">
@@ -45,6 +51,13 @@
 
 <script>
 export default {
+  computed: {
+    total() {
+      return this.$store.state.wallet.wallets.reduce((a, b) => ({
+        balance: Number(a.balance) + Number(b.balance)
+      })).balance
+    }
+  },
   methods: {
     async getWallet() {
       await this.$store.dispatch('wallet/getWallet', (err, result) => {

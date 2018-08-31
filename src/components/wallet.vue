@@ -20,23 +20,12 @@
         </div>
 
         <div v-else class="sweep">
-          <v-flex xs12>
-            <v-text-field
-              v-model="recipientAddress"
-              label="Recepient Address"
-              box
-              style="width: 20vw; margin: auto"
-            />
-          </v-flex>
-          <v-flex xs12>
+          <v-flex xs12 reverse>
             <v-text-field
               v-model="amount"
               label="Amount Transfer"
-              box
               style="width: 20vw; margin: auto"
             />
-          </v-flex>
-          <v-flex>
             <v-btn round color="success" dark @click="() => { sweep(walletInfo.address) }">Sweep</v-btn>
           </v-flex>
         </div>
