@@ -41,7 +41,7 @@ export default {
       senderAddress: '',
       recipientAddress: '',
       transferReceipt: '',
-      amount: 0
+      amount: ''
     }
   },
   methods: {

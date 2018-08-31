@@ -1,19 +1,17 @@
 <template>
   <v-flex xs12>
-    <v-card class="wallet" style="border-radius: 10px; margin-left: 15px;">
-      <v-card-title primary-title>
-        <div class="caption" style="width: 100%; margin: 10px">
-          Wallet
-          <div class="headline">{{ walletInfo.address }}</div>
+    <v-card class="wallet" style="border-radius: 10px; margin-left: 15px; width: 40vw">
+      <v-card-title primary-title style="padding: 10px 10px 10px 10px;">
+        <div class="subheading" style="width: 100%; margin: auto; font-weight: 600">
+          <v-icon style="margin-right: 5px">fas fa-wallet</v-icon>
+          {{ walletInfo.address }}
         </div>
-
-        <v-card-text>{{ walletInfo.balance }}
+        <v-card-text class="subheading" style="margin-right: 10px;">{{ walletInfo.balance }}
           <v-icon style="margin-left: 10px">fab fa-ethereum</v-icon>
         </v-card-text>
-
         <div v-if="!sweeper" class="sweep">
           <v-card-actions style="margin: auto; width: 171px">
-            <v-btn class="balBtn" style="border-radius: 5px" @click="() => { getBalance(walletInfo.address) }">
+            <v-btn class="balBtn" style="border-radius: 5px; font-weight: 800" @click="() => { getBalance(walletInfo.address) }">
               Get Balance
             </v-btn>
           </v-card-actions>

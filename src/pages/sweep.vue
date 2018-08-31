@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div v-if="funded.length > 0" style="margin: auto; width: 50vw">
+    <div v-if="funded.length > 0" style="padding: 50px; width: 50vw">
       <wallet v-for="wal in funded" :key="wal.address" :sweeper="true"/>
     </div>
     <div v-if="wallets.length === 0" class="alert">

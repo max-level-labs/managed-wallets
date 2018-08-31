@@ -53,7 +53,9 @@
 export default {
   computed: {
     total() {
-      return this.$store.state.wallet.wallets.reduce((a, b) => ({
+      const wallets = this.$store.state.wallet.wallets
+      if (wallets.length === 0) return 0
+      return wallets.reduce((a, b) => ({
         balance: Number(a.balance) + Number(b.balance)
       })).balance
     }

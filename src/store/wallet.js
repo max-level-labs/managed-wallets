@@ -109,7 +109,7 @@ export const actions = {
       })
   },
   async transfer({ dispatch }, params) {
-    const value = web3.utils.toWei(params.value, 'ether')
+    const value = web3.utils.toWei(Number(params.value), 'ether')
     const estimateGas = await web3.eth.estimateGas({
       from: params.from,
       to: params.to,
