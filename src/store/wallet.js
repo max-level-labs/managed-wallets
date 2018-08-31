@@ -63,8 +63,8 @@ export const actions = {
       )
       .then(receipt => {
         const newAddress = receipt.events.LogNewWallet.returnValues[0]
-        commit('addAddress', { address: newAddress, balance: 0 })
-        commit('setInfo', { address: newAddress, balance: 0 })
+        commit('addAddress', { address: newAddress, balance: '0' })
+        commit('setInfo', { address: newAddress, balance: '0' })
         callback(null, newAddress)
       })
       .catch(err => {
