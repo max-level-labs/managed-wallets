@@ -1,12 +1,12 @@
 <template>
   <section class="container">
     <div v-if="funded.length > 0" style="margin: auto; width: 50vw">
-      <wallet v-for="wal in funded" :key="wal.address" :wallet="wal" :sweeper="true"/>
+      <wallet v-for="wal in funded" :key="wal.address" :sweeper="true"/>
     </div>
     <div v-if="wallets.length === 0" class="alert">
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> No wallets have been created </v-alert> 
     </div>
-    <div v-if="check" class="alert">
+    <div v-if="wallets.length > 0 && funded.length === 0" class="alert">
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> Wallets have no funds </v-alert>
     </div>
   </section>
@@ -25,13 +25,6 @@ export default {
     },
     funded() {
       return this.$store.state.wallet.wallets.filter(wal => wal.balance !== '0')
-    },
-    check() {
-      const wallets = this.$store.state.wallet.wallets
-      if (wallets.length === 0) return false
-      return !wallets.reduce((a, b) => ({
-        balance: Number(a.balance) + Number(b.balance)
-      })).balance
     }
   },
   async fetch({ store }) {
