@@ -22,20 +22,20 @@
         </v-btn>
       </v-toolbar-items>
 
-      <v-toolbar-items class="hidden-sm-and-dwn">
-        <v-btn style="margin-left: 10px;" flat dark>
-          <nuxt-link class="tabs" to="/sweep">
+      <v-toolbar-items class="hidden-sm-and-dwn" style="align-items: center">
+        <nuxt-link class="tabs" to="/sweep" style="height: 100%">
+          <v-btn style="margin-left: 10px; display:flex;" flat dark>
             <v-icon>fas fa-broom</v-icon>
-          </nuxt-link>
-        </v-btn>
+          </v-btn>
+        </nuxt-link>
       </v-toolbar-items>
 
-      <v-toolbar-items class="hidden-sm-and-dwn">
-        <v-btn style="margin-left: 10px;" flat dark>
-          <nuxt-link class="tabs" to="/transfer">
+      <v-toolbar-items class="hidden-sm-and-dwn" style="align-items: center">
+        <nuxt-link class="tabs" to="/transfer" style="height: 100%">
+          <v-btn style="margin-left: 10px; display:flex;" flat dark>
             <v-icon>fas fa-exchange-alt</v-icon>
-          </nuxt-link>
-        </v-btn>
+          </v-btn>
+        </nuxt-link>
       </v-toolbar-items>
 
       <v-toolbar-items class="hidden-sm-and-dwn">
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tabs {
   outline: none;
   text-decoration: none;

@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div v-if="funded.length > 0" style="padding: 50px; width: 50vw">
-      <wallet v-for="wal in funded" :key="wal.address" :sweeper="true"/>
+      <wallet v-for="wal in funded" :key="wal.address" :address="wal.address" :sweeper="true"/>
     </div>
     <div v-if="wallets.length === 0" class="alert">
       <v-alert :value="true" dismissible class="title font-weight-black" type="info"> No wallets have been created </v-alert> 
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   min-height: 100vh;
   max-width: 100vw;

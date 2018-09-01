@@ -36,16 +36,23 @@
 export default {
   props: {
     wallet: { type: Object, default: () => ({}) },
-    sweeper: { type: Boolean, default: false }
+    sweeper: { type: Boolean, default: false },
+    address: { type: String, default: '' }
   },
   data() {
     return {
-      amount: 0,
+      amount: '',
       recipientAddress: ''
     }
   },
   computed: {
     walletInfo() {
+      if (this.sweeper === true) {
+        console.log(this.address)
+        return this.$store.state.wallet.wallets.find(
+          wal => wal.address === this.address
+        )
+      }
       return this.$store.state.wallet.walletInfo
     },
     balance() {
@@ -80,6 +87,7 @@ export default {
 .wallet {
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .balBtn {

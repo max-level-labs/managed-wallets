@@ -100,16 +100,17 @@ export const actions = {
         }
       )
       .then(() => {
+        return dispatch('checkBalance')
+      })
+      .then(() => {
         commit('sweepWallet', walletAddress)
-        dispatch('getBalance', { address: walletAddress })
       })
       .catch(err => {
-        console.error(err)
         callback(err, null)
       })
   },
   async transfer({ dispatch }, params) {
-    const value = web3.utils.toWei(Number(params.value), 'ether')
+    const value = web3.utils.toWei(params.value, 'ether')
     const estimateGas = await web3.eth.estimateGas({
       from: params.from,
       to: params.to,
